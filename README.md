@@ -22,6 +22,10 @@
 [![⚡ Live Demo](https://img.shields.io/badge/⚡%20Live%20Interactive%20Demo-opentrack--os.pages.dev-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://opentrack-os.pages.dev)
 [![📱 Driver PWA](https://img.shields.io/badge/📱%20Driver%20PWA-opentrack--os.pages.dev%2Fdriver-0284c7?style=for-the-badge&logo=pwa&logoColor=white)](https://opentrack-os.pages.dev/driver)
 
+<br /><br />
+
+<img src="docs/preview.png" width="96%" alt="OpenTrack OS Dashboard Preview" />
+
 </div>
 
 ---

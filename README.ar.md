@@ -22,6 +22,10 @@
 [![⚡ التجربة الحية الفورية](https://img.shields.io/badge/⚡%20التجربة%20الحية%20الفورية-opentrack--os.pages.dev-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://opentrack-os.pages.dev)
 [![📱 تطبيق الكابتن PWA](https://img.shields.io/badge/📱%20تطبيق%20الكابتن-opentrack--os.pages.dev%2Fdriver-0284c7?style=for-the-badge&logo=pwa&logoColor=white)](https://opentrack-os.pages.dev/driver)
 
+<br /><br />
+
+<img src="docs/preview.png" width="96%" alt="معاينة لوحة تحكم أوبن تراك" />
+
 </div>
 
 ---
