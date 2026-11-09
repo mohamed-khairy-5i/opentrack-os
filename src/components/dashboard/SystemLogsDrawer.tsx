@@ -19,7 +19,7 @@ export const SystemLogsDrawer: React.FC<SystemLogsDrawerProps> = ({
   return (
     <div
       dir={lang === "ar" ? "rtl" : "ltr"}
-      className={`absolute bottom-8 right-6 z-10 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 overflow-hidden ${
+      className={`absolute bottom-8 ${lang === "ar" ? "left-6" : "right-6"} z-10 bg-[#12141a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 overflow-hidden ${
         isExpanded ? "w-80 p-3.5" : "w-64 p-2.5"
       }`}
     >

@@ -114,9 +114,9 @@ export const OpenTrackMap: React.FC<OpenTrackMapProps> = ({
         attributionControl: false,
       });
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         maxZoom: 19,
-        className: "map-tiles-dark",
+        subdomains: "abcd",
       }).addTo(map.current);
 
       // Create Markers for each driver

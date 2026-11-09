@@ -33,7 +33,7 @@ export const RouteInfoCard: React.FC<RouteInfoCardProps> = ({
   return (
     <div
       dir={isRtl ? "rtl" : "ltr"}
-      className="absolute bottom-8 left-6 z-10 w-80 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl space-y-3"
+      className={`absolute bottom-8 ${isRtl ? "right-6" : "left-6"} z-10 w-80 bg-[#12141a]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl space-y-3`}
     >
       {/* Target Destination & Current Street */}
       <div>

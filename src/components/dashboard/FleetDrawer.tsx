@@ -23,7 +23,7 @@ export const FleetDrawer: React.FC<FleetDrawerProps> = ({
   return (
     <div
       dir={isRtl ? "rtl" : "ltr"}
-      className="absolute top-20 right-6 z-10 w-80 bg-[#12141a]/85 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 shadow-2xl"
+      className={`absolute top-6 ${isRtl ? "left-6" : "right-6"} z-10 w-80 bg-[#12141a]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-2xl`}
     >
       <div className="flex items-center justify-between mb-2.5 px-1">
         <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">

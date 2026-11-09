@@ -26,7 +26,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   lang = "ar",
 }) => {
   return (
-    <div dir={lang === "ar" ? "rtl" : "ltr"} className="absolute top-6 right-6 z-20 w-80">
+    <div dir={lang === "ar" ? "rtl" : "ltr"} className="absolute top-6 left-1/2 -translate-x-1/2 z-30 w-80 sm:w-96 max-w-[calc(100vw-3rem)]">
       <div className="relative">
         <div className="relative flex items-center">
           <input
@@ -34,7 +34,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             value={query}
             onChange={(e) => onChangeQuery(e.target.value)}
             placeholder={placeholder}
-            className="w-full px-10 py-2.5 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 shadow-2xl transition-all"
+            className="w-full px-10 py-2.5 bg-[#12141a]/95 backdrop-blur-xl border border-white/15 rounded-xl text-xs text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/70 shadow-2xl transition-all"
           />
           <Search className={`w-4 h-4 text-gray-400 absolute ${lang === "ar" ? "right-3.5" : "left-3.5"} pointer-events-none`} />
           {query && (
