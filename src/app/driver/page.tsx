@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navigation, Wifi, WifiOff, MapPin, Gauge, ShieldCheck, ArrowLeft, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { RoutingService } from "@/services/RoutingService";
+import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
 
 export default function DriverApp() {
   const [isOnline, setIsOnline] = useState(false);
@@ -117,11 +118,14 @@ export default function DriverApp() {
 
       {/* Center Section: Main Driver Card & Action Button */}
       <div className="relative z-10 my-auto py-8 flex flex-col items-center text-center">
-        {/* Title */}
-        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
-          OpenTrack Driver
-        </h1>
-        <p className="text-xs text-white/40 mt-1 font-mono">Zero-Cost Mobile Telemetry Beacon</p>
+        {/* Title & Brand Icon */}
+        <div className="flex flex-col items-center">
+          <OpenTrackLogo size={48} glow={true} className="mb-2" />
+          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
+            OpenTrack Driver
+          </h1>
+          <p className="text-xs text-white/40 mt-1 font-mono">Zero-Cost Mobile Telemetry Beacon</p>
+        </div>
 
         {/* Big Start / End Shift Button */}
         <div className="my-8 relative flex items-center justify-center">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Smartphone } from "lucide-react";
+import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
 
 const MapComponent = dynamic(() => import("@/components/MapComponent").then(mod => mod.MapComponent), {
   ssr: false,
@@ -36,10 +37,15 @@ export default function Home() {
 
       {/* Glassmorphism Dashboard UI */}
       <div className="absolute top-6 left-6 z-10 w-80 glass p-6 rounded-2xl shadow-2xl transition-all duration-500 hover:scale-[1.02]">
-        <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-          OpenTrack OS
-        </h1>
-        <p className="text-sm text-gray-400 mt-1">Live Delivery Monitor</p>
+        <div className="flex items-center gap-3">
+          <OpenTrackLogo size={36} glow={true} />
+          <div>
+            <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">
+              OpenTrack OS
+            </h1>
+            <p className="text-[11px] font-mono text-gray-400">Zero-Cost Fleet Engine</p>
+          </div>
+        </div>
 
         <div className="mt-6 space-y-4">
           <div className="p-4 rounded-xl bg-white/5 border border-white/10">

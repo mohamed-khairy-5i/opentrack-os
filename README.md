@@ -1,5 +1,8 @@
-# OpenTrack OS 🗺️⚡
-> **The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.**
+<div align="center">
+  <img src="src/app/icon.svg" width="96" height="96" alt="OpenTrack OS Logo" />
+  <h1>OpenTrack OS</h1>
+  <p><strong>The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.</strong></p>
+</div>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.1.0-black?logo=next.js)](https://nextjs.org/)
@@ -90,14 +93,25 @@ Open [http://localhost:3000/driver](http://localhost:3000/driver) on your phone 
 opentrack-os/
 ├── src/
 │   ├── app/
+│   │   ├── icon.svg               # Brand App Favicon & Vector Mark
 │   │   ├── page.tsx               # Main Operator Dashboard UI
 │   │   ├── driver/page.tsx        # Mobile Driver PWA Interface
 │   │   └── layout.tsx             # Root Layout & Fonts
 │   ├── components/
+│   │   ├── icons/
+│   │   │   └── OpenTrackLogo.tsx  # Dynamic Precision Vector Brand Logo
+│   │   ├── dashboard/             # Modular Non-Blocking UI Overlays
+│   │   │   ├── SearchBar.tsx      # Nominatim Autocomplete Overlay
+│   │   │   ├── FleetDrawer.tsx    # Multi-Courier Active Fleet List
+│   │   │   ├── RouteInfoCard.tsx  # Navigation Metrics & Control Toggles
+│   │   │   ├── SystemLogsDrawer.tsx # Collapsible Telemetry Terminal
+│   │   │   └── TripPlaybackBar.tsx # Route Scrubber & Playback Controls
 │   │   └── MapComponent.tsx       # Core Leaflet Map Engine & Fleet Controller
-│   └── services/
-│       ├── RoutingService.ts      # OSRM Pathfinding & Map Matching
-│       └── SearchService.ts       # Nominatim Places Geocoding Engine
+│   ├── services/
+│   │   ├── RoutingService.ts      # OSRM Pathfinding & Map Matching
+│   │   └── SearchService.ts       # Nominatim Places Geocoding Engine
+│   └── types/
+│       └── fleet.ts               # Driver, Telemetry, and Vehicle Type Definitions
 ├── ARCHITECTURE_ROADMAP.md        # Technical System Architecture & Mermaid Diagrams
 ├── ROUTE_STYLING.md               # Customization Guide for Neon Path Colors
 ├── .env.example                   # Optional Environment Template
