@@ -16,6 +16,9 @@ export interface Translations {
   operational: string;
   pwaLinked: string;
   autonomousEngine: string;
+  statusDelivering: string;
+  statusEnRoute: string;
+  statusIdle: string;
 
   // Navigation & Metrics
   targetDestination: string;
@@ -67,6 +70,9 @@ export const translations: Record<Language, Translations> = {
     operational: "يعمل بكفاءة",
     pwaLinked: "متصل بهاتف السائق",
     autonomousEngine: "محرك محاكاة ذاتي",
+    statusDelivering: "جاري التوصيل",
+    statusEnRoute: "في الطريق",
+    statusIdle: "في الانتظار",
 
     targetDestination: "الوجهة المستهدفة",
     currentStreetLabel: "الشارع الحالي",
@@ -113,6 +119,9 @@ export const translations: Record<Language, Translations> = {
     operational: "Operational",
     pwaLinked: "PWA Linked",
     autonomousEngine: "Autonomous Engine",
+    statusDelivering: "Delivering",
+    statusEnRoute: "En Route",
+    statusIdle: "Standby",
 
     targetDestination: "Target Destination",
     currentStreetLabel: "Current Street",

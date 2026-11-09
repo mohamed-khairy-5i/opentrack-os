@@ -60,8 +60,12 @@ export const FleetDrawer: React.FC<FleetDrawerProps> = ({
                   )}
                 </div>
                 <div className="overflow-hidden">
-                  <p className="text-xs font-semibold text-gray-200 truncate">{driver.name}</p>
-                  <p className="text-[10px] text-gray-400 truncate">{driver.currentStreet}</p>
+                  <p className="text-xs font-semibold text-gray-200 truncate">
+                    {driver.nameI18n ? driver.nameI18n[lang] : driver.name}
+                  </p>
+                  <p className="text-[10px] text-gray-400 truncate">
+                    {driver.currentStreetI18n ? driver.currentStreetI18n[lang] : driver.currentStreet}
+                  </p>
                 </div>
               </div>
 
@@ -75,7 +79,7 @@ export const FleetDrawer: React.FC<FleetDrawerProps> = ({
                     style={{ backgroundColor: driver.color }}
                   />
                   <span className="text-[8px] uppercase tracking-wider text-gray-400">
-                    {driver.status}
+                    {driver.status === "delivering" ? dict.statusDelivering : driver.status === "en_route" ? dict.statusEnRoute : dict.statusIdle}
                   </span>
                 </div>
               </div>

@@ -46,14 +46,21 @@ export const RouteInfoCard: React.FC<RouteInfoCardProps> = ({
             className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase"
             style={{ backgroundColor: `${activeDriver.color}20`, color: activeDriver.color }}
           >
-            {activeDriver.name.split(" ")[0]}
+            {lang === "ar"
+              ? activeDriver.nameI18n?.ar.split(" ")[1] || "كابتن"
+              : activeDriver.nameI18n?.en.split(" ")[1] || "Capt."}
           </span>
         </div>
         <p className="text-xs font-bold text-gray-200 mt-1 truncate">
-          {activeDriver.destination.name}
+          {activeDriver.destination.nameI18n
+            ? activeDriver.destination.nameI18n[lang]
+            : activeDriver.destination.name}
         </p>
         <p className="text-[10px] text-gray-400 truncate mt-0.5">
-          📍 {dict.currentStreetLabel}: {activeDriver.currentStreet}
+          📍 {dict.currentStreetLabel}:{" "}
+          {activeDriver.currentStreetI18n
+            ? activeDriver.currentStreetI18n[lang]
+            : activeDriver.currentStreet}
         </p>
 
         {/* Geofencing Arrival Alert */}

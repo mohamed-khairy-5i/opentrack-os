@@ -20,33 +20,81 @@ const INITIAL_FLEET: Driver[] = [
   {
     id: "driver_1",
     name: "كابتن أحمد (دراجة سريعة)",
+    nameI18n: {
+      ar: "كابتن أحمد (دراجة سريعة)",
+      en: "Capt. Ahmed (Express Bike)",
+    },
     vehicleType: "bike",
     color: "#3b82f6", // Neon Blue
     coords: { lat: 30.0444, lng: 31.2357 }, // Tahrir Square
     currentStreet: "ميدان التحرير",
-    destination: { lat: 30.0131, lng: 31.2089, name: "جامعة القاهرة (Giza)" },
+    currentStreetI18n: {
+      ar: "ميدان التحرير",
+      en: "Tahrir Square",
+    },
+    destination: {
+      lat: 30.0131,
+      lng: 31.2089,
+      name: "جامعة القاهرة (الجيزة)",
+      nameI18n: {
+        ar: "جامعة القاهرة (الجيزة)",
+        en: "Cairo University (Giza)",
+      },
+    },
     status: "delivering",
     speed: 38,
   },
   {
     id: "driver_2",
     name: "كابتن محمود (فان توصيل)",
+    nameI18n: {
+      ar: "كابتن محمود (فان توصيل)",
+      en: "Capt. Mahmoud (Delivery Van)",
+    },
     vehicleType: "car",
     color: "#10b981", // Emerald Green
     coords: { lat: 30.0626, lng: 31.3285 }, // Nasr City
-    currentStreet: "طريق النصر",
-    destination: { lat: 30.0911, lng: 31.3235, name: "ميدان الكوربة (Heliopolis)" },
+    currentStreet: "طريق النصر، مدينة نصر",
+    currentStreetI18n: {
+      ar: "طريق النصر، مدينة نصر",
+      en: "Al-Nasr Rd, Nasr City",
+    },
+    destination: {
+      lat: 30.0911,
+      lng: 31.3235,
+      name: "ميدان الكوربة (مصر الجديدة)",
+      nameI18n: {
+        ar: "ميدان الكوربة (مصر الجديدة)",
+        en: "Korba Square (Heliopolis)",
+      },
+    },
     status: "en_route",
     speed: 45,
   },
   {
     id: "driver_3",
     name: "كابتن يوسف (سكوتر شحن)",
+    nameI18n: {
+      ar: "كابتن يوسف (سكوتر شحن)",
+      en: "Capt. Youssef (Cargo Scooter)",
+    },
     vehicleType: "scooter",
     color: "#f59e0b", // Amber Gold
     coords: { lat: 30.0571, lng: 31.2173 }, // Zamalek
-    currentStreet: "شارع 26 يوليو",
-    destination: { lat: 30.0512, lng: 31.1986, name: "ميدان سفنكس (Mohandessin)" },
+    currentStreet: "شارع 26 يوليو، الزمالك",
+    currentStreetI18n: {
+      ar: "شارع 26 يوليو، الزمالك",
+      en: "26th July St, Zamalek",
+    },
+    destination: {
+      lat: 30.0512,
+      lng: 31.1986,
+      name: "ميدان سفنكس (المهندسين)",
+      nameI18n: {
+        ar: "ميدان سفنكس (المهندسين)",
+        en: "Sphinx Square (Mohandessin)",
+      },
+    },
     status: "delivering",
     speed: 32,
   },
@@ -132,7 +180,7 @@ export const OpenTrackMap: React.FC<OpenTrackMapProps> = ({
           weight: driver.id === selectedDriverId ? 3 : 1.5,
         })
           .addTo(map.current)
-          .bindPopup(`<b>${driver.name}</b><br>${driver.currentStreet}`);
+          .bindPopup(`<b>${driver.nameI18n ? driver.nameI18n[lang] : driver.name}</b><br>${driver.currentStreetI18n ? driver.currentStreetI18n[lang] : driver.currentStreet}`);
 
         driverMarkers.current[driver.id] = dMarker;
 
@@ -145,7 +193,7 @@ export const OpenTrackMap: React.FC<OpenTrackMapProps> = ({
           weight: 1,
         })
           .addTo(map.current)
-          .bindPopup(`<b>الوجهة:</b> ${driver.destination.name}`);
+          .bindPopup(`<b>${lang === "ar" ? "الوجهة:" : "Destination:"}</b> ${driver.destination.nameI18n ? driver.destination.nameI18n[lang] : driver.destination.name}`);
 
         destMarkers.current[driver.id] = destMarker;
 
