@@ -17,6 +17,11 @@
 [![OSRM](https://img.shields.io/badge/Routing-OSRM-orange)](http://project-osrm.org/)
 [![Zero Cost](https://img.shields.io/badge/Cost-$0%20(Forever)-success)](#why-opentrack-os)
 
+<br />
+
+[![⚡ Live Demo](https://img.shields.io/badge/⚡%20Live%20Interactive%20Demo-opentrack--os.pages.dev-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://opentrack-os.pages.dev)
+[![📱 Driver PWA](https://img.shields.io/badge/📱%20Driver%20PWA-opentrack--os.pages.dev%2Fdriver-0284c7?style=for-the-badge&logo=pwa&logoColor=white)](https://opentrack-os.pages.dev/driver)
+
 </div>
 
 ---
