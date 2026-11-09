@@ -1,0 +1,23 @@
+{
+  "name": "OpenTrack OS",
+  "short_name": "OpenTrack",
+  "description": "Zero-Cost Fleet Engine & Real-time Tracking",
+  "start_url": "/driver",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/thumbnail.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
