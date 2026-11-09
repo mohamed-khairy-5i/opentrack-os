@@ -74,6 +74,31 @@ Open [http://localhost:3000/driver](http://localhost:3000/driver) on your phone 
 
 ---
 
+## 📦 Drop-in Component Usage (Shadcn Style)
+
+You can copy and embed OpenTrack OS into any existing Next.js or React application in seconds:
+
+```tsx
+import dynamic from "next/dynamic";
+
+// 1. Dynamic Import (Disables SSR for Leaflet window object)
+const OpenTrackMap = dynamic(
+  () => import("@/components/MapComponent").then((mod) => mod.MapComponent),
+  { ssr: false }
+);
+
+// 2. Drop into your Delivery / Tracking page
+export default function OrderTrackingPage() {
+  return (
+    <div className="relative w-full h-screen">
+      <OpenTrackMap />
+    </div>
+  );
+}
+```
+
+---
+
 ## 🛠️ Tech Stack & Architecture
 
 | Layer | Open-Source Technology | Purpose |

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation, Compass, Cpu } from "lucide-react";
+import { Navigation, Compass, Cpu, ShieldAlert } from "lucide-react";
 import { Driver, TelemetrySourceMode } from "@/types/fleet";
 
 interface RouteInfoCardProps {
@@ -43,6 +43,16 @@ export const RouteInfoCard: React.FC<RouteInfoCardProps> = ({
         <p className="text-[10px] text-gray-400 truncate mt-0.5">
           📍 الشارع الحالي: {activeDriver.currentStreet}
         </p>
+
+        {/* Geofencing Arrival Alert */}
+        {activeDriver.routeInfo && activeDriver.routeInfo.distance <= 0.4 && (
+          <div className="mt-2 py-1.5 px-2.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center gap-2 text-emerald-400 animate-pulse">
+            <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+            <span className="text-[10px] font-bold font-mono">
+              🎯 داخل نطاق التسليم (Geofence Zone &lt; 400m)
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Metrics Row (Distance, ETA, Speed) */}

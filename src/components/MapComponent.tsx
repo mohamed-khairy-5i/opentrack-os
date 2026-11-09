@@ -51,6 +51,7 @@ export const MapComponent = () => {
   const map = useRef<L.Map | null>(null);
   const driverMarkers = useRef<{ [key: string]: L.CircleMarker }>({});
   const destMarkers = useRef<{ [key: string]: L.CircleMarker }>({});
+  const geofenceCircles = useRef<{ [key: string]: L.Circle }>({});
   const routeLayer = useRef<L.LayerGroup | null>(null);
 
   // Fleet & Selection State
@@ -131,6 +132,18 @@ export const MapComponent = () => {
           .bindPopup(`<b>الوجهة:</b> ${driver.destination.name}`);
 
         destMarkers.current[driver.id] = destMarker;
+
+        // Geofencing Arrival Perimeter Circle (350m radius)
+        const geofence = L.circle([driver.destination.lat, driver.destination.lng], {
+          radius: 350,
+          color: driver.color,
+          fillColor: driver.color,
+          fillOpacity: 0.08,
+          weight: 1,
+          dashArray: "4, 6",
+        }).addTo(map.current);
+
+        geofenceCircles.current[driver.id] = geofence;
       });
 
       setIsLoaded(true);
@@ -334,6 +347,7 @@ export const MapComponent = () => {
 
     setShowDropdown(false);
     setSearchQuery("");
+    geofenceCircles.current[selectedDriverId]?.setLatLng([lat, lng]);
     addLog(`Destination updated: ${cleanName}`);
 
     if (map.current) {

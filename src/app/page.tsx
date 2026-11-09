@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Smartphone } from "lucide-react";
+import { Smartphone, Star } from "lucide-react";
 import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
 
 const MapComponent = dynamic(() => import("@/components/MapComponent").then(mod => mod.MapComponent), {
@@ -74,7 +74,17 @@ export default function Home() {
             <span>Open Driver App (Phone PWA)</span>
           </Link>
 
-          <div className="flex justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+          <a
+            href="https://github.com/mohamed-khairy-5i/opentrack-os"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full py-2.5 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 text-amber-400 hover:text-amber-300 text-xs font-semibold flex items-center justify-center gap-2 transition-all duration-300 group"
+          >
+            <Star className="w-3.5 h-3.5 fill-amber-400/20 group-hover:scale-110 transition-transform" />
+            <span>Star on GitHub</span>
+          </a>
+
+          <div className="flex justify-between items-center text-[10px] text-gray-500 uppercase tracking-widest font-bold pt-1">
             <span>Region</span>
             <span className="text-gray-300">Cairo, EG</span>
           </div>
