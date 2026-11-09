@@ -34,7 +34,20 @@
 
 Google Maps Platform charges up to **$5 to $10 per 1,000 navigation calls** and **$7 per 1,000 map loads**. For delivery startups and indie developers, a fleet of just 5 couriers can rack up hundreds of dollars in monthly cloud bills.
 
-**OpenTrack OS** eliminates corporate vendor lock-in. It gives you a drop-in, production-grade tracking and routing dashboard built with cutting-edge open-source tools—**100% free forever, requiring no credit card, no billing accounts, and zero API keys.**
+**OpenTrack OS** eliminates corporate vendor lock-in. It gives you a drop-in, production-grade tracking and routing dashboard built with cutting-edge open-source tools—**100% free forever, requiring zero subscription fees, no billing accounts, and zero API keys.**
+
+---
+
+### 📊 Architectural Comparison: OpenTrack OS vs. Paid Mapping Platforms
+
+| Metric / Capability | Google Maps & Fleet Engine | Mapbox Navigation | **OpenTrack OS** 🚀 |
+| :--- | :---: | :---: | :---: |
+| **Usage Pricing** | $5.00 – $10.00 / 1k req | $2.00 – $4.00 / 1k req | **$0.00 (100% Free Forever)** |
+| **API Keys & Setup** | Mandatory Billing Account & Keys | Mandatory Token & Setup | **Zero Keys / Instant Plug & Play** |
+| **Driver Mobile Beacon** | Proprietary Mobile SDK | Proprietary Mobile SDK | **Zero-Install Web PWA Included** |
+| **Language & RTL** | Generic LTR Auto-translation | Partial RTL Support | **Native Arabic RTL & English First-Class** |
+| **Data Privacy & Control** | Centralized Third-party Cloud | Centralized Mapbox Telemetry | **100% Self-Hostable & Edge-Ready** |
+| **Aesthetic HUD** | Paid Custom Map Styles | Paid Custom Map Styles | **Obsidian Glassmorphism Built-in** |
 
 ---
 
@@ -117,6 +130,38 @@ export default function OrderTrackingPage() {
 ---
 
 ## 🛠️ Tech Stack & Architecture
+
+### 🏗️ System Architecture & Data Flow
+
+```mermaid
+flowchart TD
+    subgraph DriverApp ["📱 Mobile Driver Beacon (PWA / /driver)"]
+        GPS["HTML5 Geolocation API (watchPosition)"]
+        Worker["Web Worker & Offline Broadcast Bus"]
+        GPS --> Worker
+    end
+
+    subgraph CoreEngine ["⚡ OpenTrack Spatial Engine ($0 Stack)"]
+        Telemetry["Realtime Telemetry & State Synchronizer"]
+        OSRM["OSRM High-Precision Routing Engine"]
+        Nominatim["Nominatim Geocoding & Places Search"]
+        Tiles["OpenStreetMap Vector Grid (Pure CSS Dark Filter)"]
+    end
+
+    subgraph CommandDeck ["🖥️ Operations Control Center (Next.js 16)"]
+        Dashboard["Fleet HUD & Live Courier Tracker"]
+        RouteHUD["Dynamic Route & ETA Card"]
+        I18n["Realtime Dual-Locale Engine (AR / EN)"]
+    end
+
+    Worker -->|Real-time Heading & Speed| Telemetry
+    Telemetry --> OSRM
+    Nominatim --> RouteHUD
+    OSRM --> Dashboard
+    Tiles --> Dashboard
+    Dashboard --> RouteHUD
+    Dashboard --> I18n
+```
 
 | Layer | Open-Source Technology | Purpose |
 | :--- | :--- | :--- |
