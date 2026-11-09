@@ -5,15 +5,20 @@ interface SystemLogsDrawerProps {
   logs: string[];
   isExpanded: boolean;
   onToggleExpanded: () => void;
+  title?: string;
+  lang?: "ar" | "en";
 }
 
 export const SystemLogsDrawer: React.FC<SystemLogsDrawerProps> = ({
   logs,
   isExpanded,
   onToggleExpanded,
+  title = "System Telemetry",
+  lang = "ar",
 }) => {
   return (
     <div
+      dir={lang === "ar" ? "rtl" : "ltr"}
       className={`absolute bottom-8 right-6 z-10 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl transition-all duration-300 overflow-hidden ${
         isExpanded ? "w-80 p-3.5" : "w-64 p-2.5"
       }`}
@@ -22,7 +27,7 @@ export const SystemLogsDrawer: React.FC<SystemLogsDrawerProps> = ({
         <div className="flex items-center gap-1.5 text-gray-400">
           <Terminal className="w-3 h-3 text-cyan-400" />
           <span className="text-[10px] font-mono font-bold tracking-wider uppercase">
-            System Telemetry
+            {title}
           </span>
         </div>
         <button

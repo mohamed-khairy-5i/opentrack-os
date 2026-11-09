@@ -4,11 +4,17 @@ import "leaflet/dist/leaflet.css";
 import { RoutingService, RouteResponse } from "@/lib/routing";
 import { SearchService, PlaceResult } from "@/lib/search";
 import { Driver, TelemetrySourceMode } from "@/types/fleet";
+import { Language, getDictionary } from "@/lib/i18n";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { FleetDrawer } from "@/components/dashboard/FleetDrawer";
 import { RouteInfoCard } from "@/components/dashboard/RouteInfoCard";
 import { SystemLogsDrawer } from "@/components/dashboard/SystemLogsDrawer";
 import { TripPlaybackBar } from "@/components/dashboard/TripPlaybackBar";
+
+export interface OpenTrackMapProps {
+  language?: Language;
+  onLanguageChange?: (lang: Language) => void;
+}
 
 const INITIAL_FLEET: Driver[] = [
   {
@@ -46,7 +52,17 @@ const INITIAL_FLEET: Driver[] = [
   },
 ];
 
-export const OpenTrackMap = () => {
+export const OpenTrackMap: React.FC<OpenTrackMapProps> = ({
+  language = "ar",
+  onLanguageChange,
+}) => {
+  const [lang, setLang] = useState<Language>(language);
+  const dict = getDictionary(lang);
+
+  useEffect(() => {
+    if (language) setLang(language);
+  }, [language]);
+
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const driverMarkers = useRef<{ [key: string]: L.CircleMarker }>({});
@@ -372,6 +388,13 @@ export const OpenTrackMap = () => {
     return () => clearInterval(playTimer);
   }, [isPlaying, isPlaybackMode]);
 
+  const handleToggleLang = () => {
+    const nextLang: Language = lang === "ar" ? "en" : "ar";
+    setLang(nextLang);
+    onLanguageChange?.(nextLang);
+    addLog(`Language switched: ${nextLang === "ar" ? "العربية" : "English"}`);
+  };
+
   return (
     <div className="relative w-full h-full overflow-hidden bg-[#0b0c10]">
       {/* 1. Underlying Leaflet Map Canvas */}
@@ -389,12 +412,16 @@ export const OpenTrackMap = () => {
           setSearchQuery("");
           setShowDropdown(false);
         }}
+        placeholder={dict.searchPlaceholder}
+        lang={lang}
       />
 
       {/* 3. Multi-Courier Fleet Drawer */}
       <FleetDrawer
         fleet={fleet}
         selectedDriverId={selectedDriverId}
+        dict={dict}
+        lang={lang}
         onSelectDriver={(driverId) => {
           setSelectedDriverId(driverId);
           const d = fleet.find((item) => item.id === driverId);
@@ -424,6 +451,9 @@ export const OpenTrackMap = () => {
           setIsPlaybackMode(!isPlaybackMode);
           addLog(`Playback Scrubber: ${!isPlaybackMode ? "Active" : "Disabled"}`);
         }}
+        lang={lang}
+        onToggleLang={handleToggleLang}
+        dict={dict}
       />
 
       {/* 5. Bottom-Center Trip Playback Scrubber (when Playback is toggled) */}
@@ -437,6 +467,9 @@ export const OpenTrackMap = () => {
             setPlaybackProgress(0);
             setIsPlaying(false);
           }}
+          title={dict.tripPlayback}
+          scrubberLabel={dict.scrubber}
+          lang={lang}
         />
       )}
 
@@ -445,6 +478,8 @@ export const OpenTrackMap = () => {
         logs={debugLog}
         isExpanded={isLogsExpanded}
         onToggleExpanded={() => setIsLogsExpanded(!isLogsExpanded)}
+        title={dict.systemTelemetry}
+        lang={lang}
       />
     </div>
   );

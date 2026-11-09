@@ -2,12 +2,15 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Navigation, Wifi, WifiOff, MapPin, Gauge, ShieldCheck, ArrowLeft, RefreshCw } from "lucide-react";
+import { Navigation, Wifi, WifiOff, MapPin, Gauge, ShieldCheck, ArrowLeft, RefreshCw, Globe } from "lucide-react";
 import Link from "next/link";
 import { RoutingService } from "@/lib/routing";
 import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
+import { Language, getDictionary } from "@/lib/i18n";
 
 export default function DriverApp() {
+  const [lang, setLang] = useState<Language>("ar");
+  const dict = getDictionary(lang);
   const [isOnline, setIsOnline] = useState(false);
   const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [accuracy, setAccuracy] = useState<number | null>(null);
@@ -89,7 +92,7 @@ export default function DriverApp() {
   };
 
   return (
-    <main className="min-h-screen bg-[#07080c] text-white flex flex-col justify-between p-6 max-w-md mx-auto relative overflow-hidden font-sans">
+    <main dir={lang === "ar" ? "rtl" : "ltr"} className="min-h-screen bg-[#07080c] text-white flex flex-col justify-between p-6 max-w-md mx-auto relative overflow-hidden font-sans">
       {/* Background Neon Ambient Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-green-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -100,19 +103,29 @@ export default function DriverApp() {
           href="/"
           className="flex items-center gap-2 text-xs font-mono text-white/50 hover:text-white transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Dashboard</span>
+          <ArrowLeft className={`w-4 h-4 ${lang === "ar" ? "rotate-180" : ""}`} />
+          <span>{dict.backToDashboard}</span>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <div
-            className={`w-2 h-2 rounded-full ${
-              isOnline ? "bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)] animate-pulse" : "bg-white/20"
-            }`}
-          />
-          <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">
-            {isOnline ? "LIVE TRANSMITTING" : "STANDBY"}
-          </span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setLang((prev) => (prev === "ar" ? "en" : "ar"))}
+            className="px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-gray-300 flex items-center gap-1"
+          >
+            <Globe className="w-3 h-3 text-blue-400" />
+            <span className="text-[10px]">{lang === "ar" ? "EN" : "عربي"}</span>
+          </button>
+
+          <div className="flex items-center gap-2">
+            <div
+              className={`w-2 h-2 rounded-full ${
+                isOnline ? "bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.8)] animate-pulse" : "bg-white/20"
+              }`}
+            />
+            <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">
+              {isOnline ? dict.liveTransmitting : dict.standby}
+            </span>
+          </div>
         </div>
       </header>
 
@@ -122,9 +135,9 @@ export default function DriverApp() {
         <div className="flex flex-col items-center">
           <OpenTrackLogo size={48} glow={true} className="mb-2" />
           <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">
-            OpenTrack Driver
+            {dict.driverTitle}
           </h1>
-          <p className="text-xs text-white/40 mt-1 font-mono">Zero-Cost Mobile Telemetry Beacon</p>
+          <p className="text-xs text-white/40 mt-1 font-mono">{dict.driverSubtitle}</p>
         </div>
 
         {/* Big Start / End Shift Button */}
@@ -147,10 +160,10 @@ export default function DriverApp() {
           >
             <Navigation className={`w-10 h-10 mb-2 ${isOnline ? "animate-pulse" : ""}`} />
             <span className="font-bold text-sm tracking-wider uppercase">
-              {isOnline ? "END SHIFT" : "GO ONLINE"}
+              {isOnline ? dict.endShift : dict.goOnline}
             </span>
             <span className="text-[9px] font-mono text-white/40 mt-1">
-              {isOnline ? "Tap to Stop" : "Tap to Transmit"}
+              {isOnline ? (lang === "ar" ? "اضغط للإيقاف" : "Tap to Stop") : (lang === "ar" ? "اضغط لبدء البث" : "Tap to Transmit")}
             </span>
           </button>
         </div>
@@ -163,7 +176,7 @@ export default function DriverApp() {
 
         {/* Live Current Road Banner */}
         <div className="w-full glass p-4 rounded-2xl border border-white/10 shadow-xl bg-black/40 backdrop-blur-xl">
-          <p className="text-[9px] font-mono uppercase tracking-widest text-white/40">Current Road Match</p>
+          <p className="text-[9px] font-mono uppercase tracking-widest text-white/40">{dict.currentStreetLabel}</p>
           <p className="text-base font-bold text-white mt-1 truncate">{streetName}</p>
         </div>
       </div>
@@ -174,16 +187,16 @@ export default function DriverApp() {
           {/* Speed */}
           <div className="glass p-3 rounded-xl border border-white/5 bg-white/5 text-center">
             <Gauge className="w-3.5 h-3.5 text-cyan-400 mx-auto mb-1" />
-            <p className="text-[8px] font-mono text-white/40 uppercase">Speed</p>
+            <p className="text-[8px] font-mono text-white/40 uppercase">{dict.speed}</p>
             <p className="text-sm font-bold font-mono text-white mt-0.5">
-              {speed !== null ? speed : "--"} <span className="text-[9px] text-white/40">km/h</span>
+              {speed !== null ? speed : "--"} <span className="text-[9px] text-white/40">{dict.kmhUnit}</span>
             </p>
           </div>
 
           {/* GPS Accuracy */}
           <div className="glass p-3 rounded-xl border border-white/5 bg-white/5 text-center">
             <ShieldCheck className="w-3.5 h-3.5 text-green-400 mx-auto mb-1" />
-            <p className="text-[8px] font-mono text-white/40 uppercase">Accuracy</p>
+            <p className="text-[8px] font-mono text-white/40 uppercase">{dict.accuracy}</p>
             <p className="text-sm font-bold font-mono text-white mt-0.5">
               {accuracy !== null ? `±${accuracy}m` : "--"}
             </p>
@@ -192,16 +205,16 @@ export default function DriverApp() {
           {/* Packets */}
           <div className="glass p-3 rounded-xl border border-white/5 bg-white/5 text-center">
             <RefreshCw className={`w-3.5 h-3.5 text-blue-400 mx-auto mb-1 ${isOnline ? "animate-spin" : ""}`} />
-            <p className="text-[8px] font-mono text-white/40 uppercase">Signals</p>
+            <p className="text-[8px] font-mono text-white/40 uppercase">{dict.packetsSent}</p>
             <p className="text-sm font-bold font-mono text-white mt-0.5">{packetsSent}</p>
           </div>
         </div>
 
         {/* Coordinates Footer */}
         <div className="py-2.5 px-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-[9px] font-mono text-white/40">
-          <span>GPS COORDINATES</span>
+          <span>{lang === "ar" ? "إحداثيات الأقمار الصناعية" : "GPS COORDINATES"}</span>
           <span className="text-white/70">
-            {location ? `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}` : "Awaiting Satellite Lock"}
+            {location ? `${location.lat.toFixed(4)}, ${location.lng.toFixed(4)}` : (lang === "ar" ? "في انتظار إشارة القمر الصناعي" : "Awaiting Satellite Lock")}
           </span>
         </div>
       </footer>

@@ -1,27 +1,37 @@
 import React from "react";
 import { Users, Bike, Car } from "lucide-react";
 import { Driver } from "@/types/fleet";
+import { Translations, Language } from "@/lib/i18n";
 
 interface FleetDrawerProps {
   fleet: Driver[];
   selectedDriverId: string;
   onSelectDriver: (driverId: string) => void;
+  dict: Translations;
+  lang: Language;
 }
 
 export const FleetDrawer: React.FC<FleetDrawerProps> = ({
   fleet,
   selectedDriverId,
   onSelectDriver,
+  dict,
+  lang,
 }) => {
+  const isRtl = lang === "ar";
+
   return (
-    <div className="absolute top-20 right-6 z-10 w-80 bg-[#12141a]/85 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 shadow-2xl">
+    <div
+      dir={isRtl ? "rtl" : "ltr"}
+      className="absolute top-20 right-6 z-10 w-80 bg-[#12141a]/85 backdrop-blur-md border border-white/10 rounded-2xl p-3.5 shadow-2xl"
+    >
       <div className="flex items-center justify-between mb-2.5 px-1">
         <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
           <Users className="w-3 h-3 text-blue-400" />
-          <span>Active Couriers ({fleet.length})</span>
+          <span>{dict.activeCouriers} ({fleet.length})</span>
         </span>
         <span className="text-[9px] font-mono text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded">
-          ALL LIVE
+          {dict.allLive}
         </span>
       </div>
 
@@ -57,7 +67,7 @@ export const FleetDrawer: React.FC<FleetDrawerProps> = ({
 
               <div className="text-right shrink-0">
                 <span className="text-[10px] font-mono font-bold text-gray-300">
-                  {driver.speed} <span className="text-[8px] text-gray-500 font-normal">km/h</span>
+                  {driver.speed} <span className="text-[8px] text-gray-500 font-normal">{dict.kmhUnit}</span>
                 </span>
                 <div className="flex items-center gap-1 justify-end mt-0.5">
                   <span

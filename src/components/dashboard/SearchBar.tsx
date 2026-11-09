@@ -10,6 +10,8 @@ interface SearchBarProps {
   showDropdown: boolean;
   onSelectPlace: (place: PlaceResult) => void;
   onClear: () => void;
+  placeholder?: string;
+  lang?: "ar" | "en";
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -20,23 +22,25 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   showDropdown,
   onSelectPlace,
   onClear,
+  placeholder = "ابحث عن شارع أو ميدان في القاهرة...",
+  lang = "ar",
 }) => {
   return (
-    <div className="absolute top-6 right-6 z-20 w-80">
+    <div dir={lang === "ar" ? "rtl" : "ltr"} className="absolute top-6 right-6 z-20 w-80">
       <div className="relative">
         <div className="relative flex items-center">
           <input
             type="text"
             value={query}
             onChange={(e) => onChangeQuery(e.target.value)}
-            placeholder="ابحث عن شارع أو ميدان في القاهرة..."
-            className="w-full pl-10 pr-9 py-2.5 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 shadow-2xl transition-all"
+            placeholder={placeholder}
+            className="w-full px-10 py-2.5 bg-[#12141a]/90 backdrop-blur-md border border-white/10 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 shadow-2xl transition-all"
           />
-          <Search className="w-4 h-4 text-gray-400 absolute left-3.5 pointer-events-none" />
+          <Search className={`w-4 h-4 text-gray-400 absolute ${lang === "ar" ? "right-3.5" : "left-3.5"} pointer-events-none`} />
           {query && (
             <button
               onClick={onClear}
-              className="absolute right-3 text-gray-400 hover:text-white transition-colors"
+              className={`absolute ${lang === "ar" ? "left-3" : "right-3"} text-gray-400 hover:text-white transition-colors`}
             >
               <X className="w-3.5 h-3.5" />
             </button>

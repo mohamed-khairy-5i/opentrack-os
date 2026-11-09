@@ -7,6 +7,9 @@ interface TripPlaybackBarProps {
   progress: number;
   onChangeProgress: (val: number) => void;
   onReset: () => void;
+  title?: string;
+  scrubberLabel?: string;
+  lang?: "ar" | "en";
 }
 
 export const TripPlaybackBar: React.FC<TripPlaybackBarProps> = ({
@@ -15,16 +18,22 @@ export const TripPlaybackBar: React.FC<TripPlaybackBarProps> = ({
   progress,
   onChangeProgress,
   onReset,
+  title = "Trip History Replay",
+  scrubberLabel = "Scrubber",
+  lang = "ar",
 }) => {
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-[420px] max-w-[90vw] bg-[#12141a]/95 backdrop-blur-xl border border-purple-500/30 rounded-2xl p-3 shadow-2xl shadow-purple-500/10">
+    <div
+      dir={lang === "ar" ? "rtl" : "ltr"}
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-[420px] max-w-[90vw] bg-[#12141a]/95 backdrop-blur-xl border border-purple-500/30 rounded-2xl p-3 shadow-2xl shadow-purple-500/10"
+    >
       <div className="flex items-center justify-between mb-2">
         <span className="text-[10px] font-mono text-purple-300 font-bold tracking-wider uppercase flex items-center gap-1.5">
           <span className="w-2 h-2 rounded-full bg-purple-400 animate-ping" />
-          <span>Trip History Replay</span>
+          <span>{title}</span>
         </span>
         <span className="text-[10px] font-mono text-gray-400">
-          Scrubber: <span className="text-purple-300 font-bold">{Math.round(progress)}%</span>
+          {scrubberLabel}: <span className="text-purple-300 font-bold">{Math.round(progress)}%</span>
         </span>
       </div>
 

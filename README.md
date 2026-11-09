@@ -6,6 +6,9 @@
   <p align="center"><strong>The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.</strong></p>
 </div>
 
+<div align="center">
+
+[![🇸🇦 النسخة العربية](https://img.shields.io/badge/🇸🇦%20النسخة%20العربية-README.ar.md-blue)](README.ar.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14.1.0-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -13,6 +16,8 @@
 [![Leaflet](https://img.shields.io/badge/Map-Leaflet-199900?logo=leaflet)](https://leafletjs.com/)
 [![OSRM](https://img.shields.io/badge/Routing-OSRM-orange)](http://project-osrm.org/)
 [![Zero Cost](https://img.shields.io/badge/Cost-$0%20(Forever)-success)](#why-opentrack-os)
+
+</div>
 
 ---
 
@@ -93,7 +98,8 @@ const OpenTrackMap = dynamic(
 export default function OrderTrackingPage() {
   return (
     <div className="relative w-full h-screen">
-      <OpenTrackMap />
+      {/* Supports language="ar" (Arabic / RTL) or language="en" (English) */}
+      <OpenTrackMap language="ar" />
     </div>
   );
 }
@@ -142,12 +148,15 @@ opentrack-os/
 │   │   └── icons/
 │   │       └── OpenTrackLogo.tsx  # Dynamic Precision Vector Brand Logo
 │   ├── lib/
+│   │   ├── i18n.ts                # Dual Language Dictionary (Arabic / English)
 │   │   ├── routing.ts             # OSRM Pathfinding & Map Matching
 │   │   └── search.ts              # Nominatim Places Geocoding Engine
 │   └── types/
 │       └── fleet.ts               # Driver, Telemetry, and Vehicle Type Definitions
 ├── .env.example                   # Optional Environment Template
 ├── LICENSE                        # MIT License
+├── README.md                      # English Documentation
+├── README.ar.md                   # Arabic Documentation
 ├── package.json
 └── tsconfig.json
 ```
