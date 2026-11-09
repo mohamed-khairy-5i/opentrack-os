@@ -1,26 +1,32 @@
-<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="420" height="90" viewBox="0 0 420 90" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="ot-logo-primary" x1="15" y1="15" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+    <linearGradient id="ot-logo-grad" x1="15" y1="15" x2="85" y2="85" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stopColor="#38bdf8" />
       <stop offset="50%" stopColor="#3b82f6" />
       <stop offset="100%" stopColor="#818cf8" />
     </linearGradient>
+    <filter id="ot-logo-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
 
-  <!-- Left Icon Mark -->
-  <g transform="translate(10, 5)">
-    <circle cx="45" cy="45" r="40" stroke="url(#ot-logo-primary)" stroke-width="2.5" stroke-dasharray="4 6" opacity="0.45" />
-    <circle cx="45" cy="45" r="32" stroke="url(#ot-logo-primary)" stroke-width="1.5" opacity="0.7" />
-    <line x1="45" y1="3" x2="45" y2="10" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
-    <line x1="45" y1="80" x2="45" y2="87" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" />
-    <line x1="3" y1="45" x2="10" y2="45" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
-    <line x1="80" y1="45" x2="87" y2="45" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" />
-    <path d="M45 16L69 68L45 57L21 68L45 16Z" fill="url(#ot-logo-primary)" />
-    <path d="M45 22L63 64L45 55L45 22Z" fill="#ffffff" fill-opacity="0.3" />
-    <circle cx="45" cy="48" r="3.5" fill="#ffffff" />
+  <!-- Left Unified Icon Mark (Identical to OpenTrackLogo and icon.svg) -->
+  <g transform="translate(5, 5) scale(0.8)">
+    <circle cx="50" cy="50" r="44" stroke="url(#ot-logo-grad)" stroke-width="2.5" stroke-dasharray="4 6" opacity="0.5" />
+    <circle cx="50" cy="50" r="36" stroke="url(#ot-logo-grad)" stroke-width="1.5" opacity="0.75" />
+    <line x1="50" y1="4" x2="50" y2="12" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="50" y1="88" x2="50" y2="96" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="4" y1="50" x2="12" y2="50" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="88" y1="50" x2="96" y2="50" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" />
+    <g filter="url(#ot-logo-glow)">
+      <path d="M50 18L76 74L50 62L24 74L50 18Z" fill="url(#ot-logo-grad)" />
+      <path d="M50 24L70 70L50 60L50 24Z" fill="#ffffff" fill-opacity="0.32" />
+      <circle cx="50" cy="52" r="3.5" fill="#ffffff" />
+    </g>
   </g>
 
-  <!-- High-Contrast Typography (Crisp in Dark & Light Modes) -->
-  <text x="115" y="55" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="#ffffff" letter-spacing="-0.02em">OpenTrack <tspan fill="#38bdf8">OS</tspan></text>
-  <text x="116" y="76" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" font-weight="700" fill="#38bdf8" letter-spacing="0.18em">ZERO-COST FLEET ENGINE</text>
+  <!-- High-Contrast Typography Unified with App UI -->
+  <text x="100" y="48" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="800" fill="#38bdf8" letter-spacing="-0.02em">OpenTrack <tspan fill="#60a5fa">OS</tspan></text>
+  <text x="101" y="70" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13" font-weight="600" fill="#94a3b8" letter-spacing="0.05em">Zero-Cost Fleet Engine</text>
 </svg>

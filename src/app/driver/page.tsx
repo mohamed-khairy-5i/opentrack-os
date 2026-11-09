@@ -101,10 +101,11 @@ export default function DriverApp() {
       <header className="relative z-10 flex items-center justify-between pb-6 border-b border-white/5">
         <Link
           href="/"
-          className="flex items-center gap-2 text-xs font-mono text-white/50 hover:text-white transition-colors"
+          className="flex items-center gap-2 text-xs font-mono text-white/70 hover:text-white transition-colors"
         >
           <ArrowLeft className={`w-4 h-4 ${lang === "ar" ? "rotate-180" : ""}`} />
-          <span>{dict.backToDashboard}</span>
+          <OpenTrackLogo size={20} glow={false} />
+          <span className="font-bold">OpenTrack OS</span>
         </Link>
 
         <div className="flex items-center gap-3">

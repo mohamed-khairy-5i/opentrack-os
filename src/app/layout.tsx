@@ -5,8 +5,15 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "OpenTrack OS | Real-time Tracking",
-  description: "Enterprise-grade open-source real-time tracking system.",
+  title: "OpenTrack OS | Zero-Cost Fleet Engine & Real-time Tracking",
+  description: "The zero-cost, drop-in open-source alternative to Google Maps & Google Fleet Engine for React and Next.js.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
