@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { RoutingService, RouteResponse } from "@/services/RoutingService";
-import { SearchService, PlaceResult } from "@/services/SearchService";
+import { RoutingService, RouteResponse } from "@/lib/routing";
+import { SearchService, PlaceResult } from "@/lib/search";
 import { Driver, TelemetrySourceMode } from "@/types/fleet";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { FleetDrawer } from "@/components/dashboard/FleetDrawer";
@@ -46,7 +46,7 @@ const INITIAL_FLEET: Driver[] = [
   },
 ];
 
-export const MapComponent = () => {
+export const OpenTrackMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const driverMarkers = useRef<{ [key: string]: L.CircleMarker }>({});
@@ -449,3 +449,5 @@ export const MapComponent = () => {
     </div>
   );
 };
+
+export default OpenTrackMap;

@@ -10,13 +10,13 @@ The routing visualization is powered by two complementary layers:
 1. **Glow Layer (Ambient Glow):** A thicker, low-opacity line that creates a soft neon halo around the path.
 2. **Main Navigation Line (Primary Route):** A sharp, high-contrast line representing the exact street trajectory.
 
-Location: `src/components/MapComponent.tsx`
+Location: `src/components/map/OpenTrackMap.tsx`
 
 ---
 
 ## 2. Customizing Path Colors & Geometry
 
-In `MapComponent.tsx`, look for the route rendering block inside `useEffect`:
+In `OpenTrackMap.tsx`, look for the route rendering block inside `useEffect`:
 
 ```typescript
 // 1. Primary Sharp Line

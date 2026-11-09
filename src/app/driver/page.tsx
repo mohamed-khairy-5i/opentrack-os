@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigation, Wifi, WifiOff, MapPin, Gauge, ShieldCheck, ArrowLeft, RefreshCw } from "lucide-react";
 import Link from "next/link";
-import { RoutingService } from "@/services/RoutingService";
+import { RoutingService } from "@/lib/routing";
 import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
 
 export default function DriverApp() {

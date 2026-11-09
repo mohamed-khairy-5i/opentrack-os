@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="src/app/icon.svg" width="96" height="96" alt="OpenTrack OS Logo" />
-  <h1>OpenTrack OS</h1>
+  <img src="public/logo.svg" width="360" alt="OpenTrack OS Logo" />
   <p><strong>The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.</strong></p>
 </div>
 
@@ -83,7 +82,7 @@ import dynamic from "next/dynamic";
 
 // 1. Dynamic Import (Disables SSR for Leaflet window object)
 const OpenTrackMap = dynamic(
-  () => import("@/components/MapComponent").then((mod) => mod.MapComponent),
+  () => import("@/components/map/OpenTrackMap").then((mod) => mod.OpenTrackMap),
   { ssr: false }
 );
 
@@ -116,32 +115,38 @@ export default function OrderTrackingPage() {
 
 ```
 opentrack-os/
+├── docs/                          # Architectural Specs & Styling Guides
+│   ├── ARCHITECTURE.md            # Technical System Architecture & Mermaid Flows
+│   └── ROUTE_STYLING.md           # Customization Guide for Neon Path Colors
+├── public/                        # Static Assets & Brand Marks
+│   ├── icon.svg                   # Vector Browser Tab Favicon
+│   └── logo.svg                   # Official Vector Project Banner Logo
 ├── src/
 │   ├── app/
-│   │   ├── icon.svg               # Brand App Favicon & Vector Mark
 │   │   ├── page.tsx               # Main Operator Dashboard UI
 │   │   ├── driver/page.tsx        # Mobile Driver PWA Interface
-│   │   └── layout.tsx             # Root Layout & Fonts
+│   │   ├── layout.tsx             # Root Layout & Metadata
+│   │   └── globals.css            # Dark Theme CSS & Glow Variables
 │   ├── components/
-│   │   ├── icons/
-│   │   │   └── OpenTrackLogo.tsx  # Dynamic Precision Vector Brand Logo
+│   │   ├── map/
+│   │   │   └── OpenTrackMap.tsx   # Core Leaflet Engine & Fleet Controller
 │   │   ├── dashboard/             # Modular Non-Blocking UI Overlays
 │   │   │   ├── SearchBar.tsx      # Nominatim Autocomplete Overlay
 │   │   │   ├── FleetDrawer.tsx    # Multi-Courier Active Fleet List
 │   │   │   ├── RouteInfoCard.tsx  # Navigation Metrics & Control Toggles
 │   │   │   ├── SystemLogsDrawer.tsx # Collapsible Telemetry Terminal
 │   │   │   └── TripPlaybackBar.tsx # Route Scrubber & Playback Controls
-│   │   └── MapComponent.tsx       # Core Leaflet Map Engine & Fleet Controller
-│   ├── services/
-│   │   ├── RoutingService.ts      # OSRM Pathfinding & Map Matching
-│   │   └── SearchService.ts       # Nominatim Places Geocoding Engine
+│   │   └── icons/
+│   │       └── OpenTrackLogo.tsx  # Dynamic Precision Vector Brand Logo
+│   ├── lib/
+│   │   ├── routing.ts             # OSRM Pathfinding & Map Matching
+│   │   └── search.ts              # Nominatim Places Geocoding Engine
 │   └── types/
 │       └── fleet.ts               # Driver, Telemetry, and Vehicle Type Definitions
-├── ARCHITECTURE_ROADMAP.md        # Technical System Architecture & Mermaid Diagrams
-├── ROUTE_STYLING.md               # Customization Guide for Neon Path Colors
 ├── .env.example                   # Optional Environment Template
 ├── LICENSE                        # MIT License
-└── package.json
+├── package.json
+└── tsconfig.json
 ```
 
 ---
@@ -163,8 +168,8 @@ NEXT_PUBLIC_OSRM_URL=https://router.project-osrm.org
 
 ## 📖 Additional Documentation
 
-* 📐 [Full Architecture & Scenarios (`ARCHITECTURE_ROADMAP.md`)](ARCHITECTURE_ROADMAP.md) - Architectural diagrams and sequence flows.
-* 🎨 [Route Styling Guide (`ROUTE_STYLING.md`)](ROUTE_STYLING.md) - How to change neon colors (Cyberpunk, Emerald, Amber) and line weights.
+* 📐 [Full Architecture & Scenarios (`docs/ARCHITECTURE.md`)](docs/ARCHITECTURE.md) - Architectural diagrams and sequence flows.
+* 🎨 [Route Styling Guide (`docs/ROUTE_STYLING.md`)](docs/ROUTE_STYLING.md) - How to change neon colors (Cyberpunk, Emerald, Amber) and line weights.
 
 ---
 

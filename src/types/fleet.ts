@@ -1,4 +1,4 @@
-import { RouteResponse } from "@/services/RoutingService";
+import { RouteResponse } from "@/lib/routing";
 
 export type VehicleType = "bike" | "car" | "scooter";
 export type DriverStatus = "delivering" | "en_route" | "idle";

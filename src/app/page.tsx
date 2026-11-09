@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Smartphone, Star } from "lucide-react";
 import { OpenTrackLogo } from "@/components/icons/OpenTrackLogo";
 
-const MapComponent = dynamic(() => import("@/components/MapComponent").then(mod => mod.MapComponent), {
+const OpenTrackMap = dynamic(() => import("@/components/map/OpenTrackMap").then(mod => mod.OpenTrackMap), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-[#0b0c10] flex items-center justify-center font-mono text-[8px] text-white/20 uppercase tracking-[0.3em]">Loading Engine...</div>
 });
@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <main className="relative w-full h-screen overflow-hidden bg-[#0b0c10]">
       {/* Map Layer */}
-      <MapComponent />
+      <OpenTrackMap />
 
       {/* Glassmorphism Dashboard UI */}
       <div className="absolute top-6 left-6 z-10 w-80 glass p-6 rounded-2xl shadow-2xl transition-all duration-500 hover:scale-[1.02]">

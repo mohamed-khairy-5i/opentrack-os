@@ -17,7 +17,7 @@ graph TD
     end
 
     subgraph Logic_Layer ["2. GIS & Logic Engine"]
-        E["RoutingService.ts (OSRM Pathfinding)"]
+        E["lib/routing.ts (OSRM Pathfinding)"]
         F["Map Matching (Road Snapping & Street Extraction)"]
         G["Navigation State & ETA Calculator"]
     end
@@ -61,7 +61,7 @@ sequenceDiagram
     autonumber
     actor Developer as Developer / Visitor
     participant App as Next.js Dashboard
-    participant Map as MapComponent (Leaflet)
+    participant Map as OpenTrackMap (Leaflet)
     participant Mock as Built-in Mock Simulator
     participant OSRM as OSRM Public Routing API
 

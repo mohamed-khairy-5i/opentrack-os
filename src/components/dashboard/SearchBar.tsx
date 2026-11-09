@@ -1,6 +1,6 @@
 import React from "react";
 import { Search, MapPin, X } from "lucide-react";
-import { PlaceResult } from "@/services/SearchService";
+import { PlaceResult } from "@/lib/search";
 
 interface SearchBarProps {
   query: string;
