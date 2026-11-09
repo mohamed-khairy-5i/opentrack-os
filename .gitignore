@@ -27,6 +27,10 @@ yarn-error.log*
 .env*.local
 .env
 
+# personal docs & user guides (kept local only)
+PROJECT_STORY_AND_GUIDE.md
+*.local.md
+
 # vercel
 .vercel
 

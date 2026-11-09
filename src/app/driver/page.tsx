@@ -4,8 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigation, Wifi, WifiOff, MapPin, Gauge, ShieldCheck, ArrowLeft, RefreshCw } from "lucide-react";
 import Link from "next/link";
-import { ref, set } from "firebase/database";
-import { db } from "@/lib/firebase";
 import { RoutingService } from "@/services/RoutingService";
 
 export default function DriverApp() {
@@ -58,7 +56,7 @@ export default function DriverApp() {
           setStreetName("Urban Road");
         }
 
-        // 1. Broadcast locally (for same-device / multi-tab free testing)
+        // 1. Broadcast locally (for cross-tab / PWA real-time streaming)
         broadcastChannel.current?.postMessage({
           lat: latitude,
           lng: longitude,
@@ -66,22 +64,6 @@ export default function DriverApp() {
           accuracy: acc,
           timestamp: new Date().toISOString(),
         });
-
-        // 2. Broadcast to Firebase if available
-        if (db) {
-          try {
-            await set(ref(db, "drivers/driver_1/location"), {
-              lat: latitude,
-              lng: longitude,
-              speed: spd || 0,
-              accuracy: acc || 0,
-              updated_at: new Date().toISOString(),
-            });
-            await set(ref(db, "stats/active_couriers"), 1);
-          } catch (e) {
-            // Permission denied or offline fallback
-          }
-        }
 
         setPacketsSent((prev) => prev + 1);
       },

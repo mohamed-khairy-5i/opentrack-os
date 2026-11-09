@@ -40,9 +40,9 @@ Google Maps Platform charges up to **$5 to $10 per 1,000 navigation calls** and 
 * **Pulsing "GO ONLINE" Button:** Uses HTML5 Geolocation (`navigator.geolocation.watchPosition`) to transmit real-time latitude, longitude, heading, and speed.
 * **Zero App Store Fees:** No need to buy a $25 Google Play or $99 Apple Developer license.
 
-### ⚡ 5. Autonomous Standalone Mock Engine
+### ⚡ 5. Autonomous Standalone Engine
 * **Instant Experience:** The dashboard runs out-of-the-box with simulated courier movement along real Cairo streets without touching a database or environment file.
-* **Pluggable Backends:** One-click toggle between **MOCK** mode and live **CLOUD** synchronization (Firebase Realtime Database, WebSockets, or custom REST APIs).
+* **PWA Live Link:** Real-time cross-tab GPS streaming directly from the `/driver` web app via standard browser `BroadcastChannel` with zero cloud setup.
 
 ### 🎛️ 6. Non-Blocking Glassmorphism UI
 * **Route Navigation Card:** Real-time distance, ETA, target location, and engine toggle switch (`ENGINE ON / OFF`).
@@ -54,7 +54,7 @@ Google Maps Platform charges up to **$5 to $10 per 1,000 navigation calls** and 
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/your-username/opentrack-os.git
+git clone https://github.com/mohamed-khairy-5i/opentrack-os.git
 cd opentrack-os
 npm install
 ```
@@ -80,7 +80,7 @@ Open [http://localhost:3000/driver](http://localhost:3000/driver) on your phone 
 | **Routing & Directions** | OSRM (Open Source Routing Machine) | Street-level route geometry, distance, and duration calculation |
 | **Geocoding & Search** | OpenStreetMap Nominatim API | Zero-cost places and street search with autocomplete |
 | **Animations & UI** | Framer Motion + Tailwind CSS | High-contrast Dark Mode with Glassmorphism blur effects |
-| **Telemetry Transport** | Standalone Mock / BroadcastChannel / Firebase | Real-time cross-tab and cross-device coordinate streaming |
+| **Telemetry Transport** | Autonomous Simulation / BroadcastChannel | Zero-cost real-time coordinate streaming and live telemetry |
 
 ---
 
@@ -95,15 +95,12 @@ opentrack-os/
 │   │   └── layout.tsx             # Root Layout & Fonts
 │   ├── components/
 │   │   └── MapComponent.tsx       # Core Leaflet Map Engine & Fleet Controller
-│   ├── services/
-│   │   ├── RoutingService.ts      # OSRM Pathfinding & Map Matching
-│   │   └── SearchService.ts       # Nominatim Places Geocoding Engine
-│   └── lib/
-│       └── firebase.ts            # Optional Cloud Sync Configuration
+│   └── services/
+│       ├── RoutingService.ts      # OSRM Pathfinding & Map Matching
+│       └── SearchService.ts       # Nominatim Places Geocoding Engine
 ├── ARCHITECTURE_ROADMAP.md        # Technical System Architecture & Mermaid Diagrams
-├── PROJECT_STORY_AND_GUIDE.md     # Arabic Project History & Simplified Guide
 ├── ROUTE_STYLING.md               # Customization Guide for Neon Path Colors
-├── .env.example                   # Optional Cloud Environment Template
+├── .env.example                   # Optional Environment Template
 ├── LICENSE                        # MIT License
 └── package.json
 ```
@@ -112,17 +109,16 @@ opentrack-os/
 
 ## ⚙️ Configuration (Optional)
 
-OpenTrack OS runs 100% standalone by default. If you wish to connect your own Firebase Realtime Database for cross-device cloud sync:
+OpenTrack OS is 100% functional out-of-the-box with **zero configuration**.
 
-1. Copy `.env.example` to `.env.local`:
-   ```bash
-   cp .env.example .env.local
-   ```
-2. Set your configuration:
-   ```env
-   NEXT_PUBLIC_TRACKING_MODE=firebase
-   NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://your-database.europe-west1.firebasedatabase.app
-   ```
+If you wish to use a custom or self-hosted OSRM routing instance, copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+And specify your router endpoint:
+```env
+NEXT_PUBLIC_OSRM_URL=https://router.project-osrm.org
+```
 
 ---
 
@@ -130,7 +126,6 @@ OpenTrack OS runs 100% standalone by default. If you wish to connect your own Fi
 
 * 📐 [Full Architecture & Scenarios (`ARCHITECTURE_ROADMAP.md`)](ARCHITECTURE_ROADMAP.md) - Architectural diagrams and sequence flows.
 * 🎨 [Route Styling Guide (`ROUTE_STYLING.md`)](ROUTE_STYLING.md) - How to change neon colors (Cyberpunk, Emerald, Amber) and line weights.
-* 📜 [قصة المشروع والدليل المبسط (`PROJECT_STORY_AND_GUIDE.md`)](PROJECT_STORY_AND_GUIDE.md) - كتيّب مبسط باللغة العربية يشرح رحلة المشروع بالكامل وكيف يعمل.
 
 ---
 

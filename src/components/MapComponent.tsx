@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { ref, onValue } from "firebase/database";
-import { db } from "@/lib/firebase";
 import { RoutingService, RouteResponse } from "@/services/RoutingService";
 import { SearchService, PlaceResult } from "@/services/SearchService";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +10,6 @@ import {
   X,
   Navigation,
   Cpu,
-  Cloud,
   Compass,
   Terminal,
   ChevronDown,
@@ -94,7 +91,7 @@ export const MapComponent = () => {
 
   // Routing & Mode Configuration
   const [isRoutingEnabled, setIsRoutingEnabled] = useState<boolean>(true);
-  const [dataSourceMode, setDataSourceMode] = useState<"mock" | "firebase">("mock");
+  const [dataSourceMode, setDataSourceMode] = useState<"sim" | "pwa">("sim");
   const [isLogsExpanded, setIsLogsExpanded] = useState<boolean>(false);
 
   // Playback & History Simulation State
@@ -212,7 +209,7 @@ export const MapComponent = () => {
 
   // 3. Autonomous Fleet Movement Simulation (Zero-Config Standalone Mode)
   useEffect(() => {
-    if (dataSourceMode !== "mock" || isPlaybackMode) return;
+    if (dataSourceMode !== "sim" || isPlaybackMode) return;
 
     const interval = setInterval(async () => {
       setFleet((prevFleet) => {
@@ -301,6 +298,34 @@ export const MapComponent = () => {
       }
     }
   }, [fleet, selectedDriverId, isRoutingEnabled]);
+
+  // 4b. Live PWA Driver Telemetry Link (Zero-Cost Cross-Tab / Mobile Sync)
+  useEffect(() => {
+    try {
+      const channel = new BroadcastChannel("opentrack_telemetry");
+      channel.onmessage = (event) => {
+        const data = event.data;
+        if (data && typeof data.lat === "number" && typeof data.lng === "number") {
+          setFleet((prev) =>
+            prev.map((d) =>
+              d.id === "driver_1"
+                ? {
+                    ...d,
+                    coords: { lat: data.lat, lng: data.lng },
+                    speed: data.speed ? Math.round(data.speed) : d.speed,
+                  }
+                : d
+            )
+          );
+          setDataSourceMode("pwa");
+          addLog(`📡 PWA Signal: ${data.lat.toFixed(4)}, ${data.lng.toFixed(4)}`);
+        }
+      };
+      return () => channel.close();
+    } catch {
+      // BroadcastChannel fallback
+    }
+  }, []);
 
   // 5. Places Search Handler (Nominatim)
   useEffect(() => {
@@ -541,14 +566,14 @@ export const MapComponent = () => {
               {/* Mode Toggle */}
               <button
                 onClick={() => {
-                  const nextMode = dataSourceMode === "mock" ? "firebase" : "mock";
+                  const nextMode = dataSourceMode === "sim" ? "pwa" : "sim";
                   setDataSourceMode(nextMode);
-                  addLog(`Data Provider: ${nextMode.toUpperCase()}`);
+                  addLog(`Telemetry Source: ${nextMode === "sim" ? "Autonomous SIM" : "PWA Live Link"}`);
                 }}
                 className="px-2 py-0.5 rounded-full text-[8px] font-mono border border-white/10 bg-white/5 hover:bg-white/10 text-white/60 flex items-center gap-1"
-                title="Toggle Data Source: Mock Simulator vs Firebase"
+                title="Toggle Data Source: Autonomous Simulation vs PWA Live Link"
               >
-                {dataSourceMode === "mock" ? <Cpu className="w-2.5 h-2.5 text-cyan-400" /> : <Cloud className="w-2.5 h-2.5 text-blue-400" />}
+                {dataSourceMode === "sim" ? <Cpu className="w-2.5 h-2.5 text-cyan-400" /> : <Navigation className="w-2.5 h-2.5 text-emerald-400" />}
                 <span>{dataSourceMode.toUpperCase()}</span>
               </button>
 

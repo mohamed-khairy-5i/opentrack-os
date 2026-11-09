@@ -5,7 +5,7 @@
 
 ## 1. High-Level Architecture Overview
 
-OpenTrack OS is structured into four decoupled layers, ensuring it can function **100% standalone with zero backend setup**, or plug into custom backends (Firebase, WebSockets, Supabase, REST APIs).
+OpenTrack OS is structured into four decoupled layers, ensuring it can function **100% standalone with zero backend setup**, or plug into custom backends (WebSockets, Server-Sent Events, REST APIs).
 
 ```mermaid
 graph TD
@@ -24,13 +24,13 @@ graph TD
 
     subgraph Data_Layer ["3. Transport & Telemetry Abstraction"]
         H["Data Provider Adapter"]
-        I["Mock Engine (Zero-Config Default)"]
-        J["Firebase Realtime Adapter (Optional)"]
+        I["Autonomous Simulation Engine"]
+        J["BroadcastChannel (PWA Live Link)"]
         K["WebSocket / REST Adapter (Optional)"]
     end
 
     subgraph Driver_Layer ["4. Location Origin (Data Source)"]
-        L["Virtual Telemetry Simulator"]
+        L["Virtual Multi-Courier Simulator"]
         M["Mobile Web PWA (HTML5 Geolocation)"]
     end
 
@@ -91,7 +91,7 @@ sequenceDiagram
     actor User as Customer / Store Owner
     participant StoreApp as Customer Store App
     participant OpenTrack as <OpenTrackMap /> Component
-    participant Backend as Store Backend (Node/Django/Firebase)
+    participant Backend as Store Backend (Node / Go / Python / REST)
 
     User->>StoreApp: Opens Order Tracking Page (#1249)
     StoreApp->>OpenTrack: <OpenTrackMap driverId="driver_12" target=[lat, lng] />
@@ -113,7 +113,7 @@ sequenceDiagram
     actor Driver as Courier / Driver
     participant Mobile as Mobile Browser (/driver PWA)
     participant GPS as Device GPS (navigator.geolocation)
-    participant Relay as Real-time Relay (WebSocket / Firebase)
+    participant Relay as Real-time Relay (BroadcastChannel / WebSocket)
     participant Dashboard as OpenTrack OS Dashboard
 
     Driver->>Mobile: Opens tracking link & taps "Go Online"
@@ -155,8 +155,8 @@ gantt
     title OpenTrack OS - Evolution to Open Source Benchmark
     dateFormat  YYYY-MM-DD
     section Phase 1: Core Decoupling
-    Decouple Firebase into Optional Adapter   :done, p1_1, 2026-11-01, 3d
-    Implement Standalone Local Mock Mode     :active, p1_2, after p1_1, 2d
+    Purge Cloud Vendor Lock-in (Zero Cost)    :done, p1_1, 2026-11-01, 3d
+    Implement Standalone Local Engine         :active, p1_2, after p1_1, 2d
     section Phase 2: Search & Multiple Drivers
     Integrate Nominatim Places Autocomplete   :p2_1, after p1_2, 3d
     Support Multi-Driver Fleet Rendering      :p2_2, after p2_1, 3d
@@ -184,7 +184,7 @@ export interface OpenTrackMapProps {
   customOsrmUrl?: string; // Optional: self-hosted instance
 
   // Data Source Mode
-  mode?: 'mock' | 'firebase' | 'websocket' | 'custom';
+  mode?: 'sim' | 'pwa' | 'websocket' | 'custom';
   telemetryStream$?: Observable<{ lat: number; lng: number }>;
 
   // Styling Customization

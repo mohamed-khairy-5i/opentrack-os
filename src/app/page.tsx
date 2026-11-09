@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { ref, onValue } from "firebase/database";
-import { db } from "@/lib/firebase";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Smartphone } from "lucide-react";
@@ -18,32 +16,16 @@ export default function Home() {
   const [isLive, setIsLive] = useState(true);
 
   useEffect(() => {
-    // Standalone Mock default
-    if (!db) {
-      setCourierCount(3);
-      setIsLive(true);
-      setStatus("Standalone Engine");
-      return;
-    }
-
-    // Sync Courier Count if Firebase is configured
+    // Listen to local PWA Driver Broadcasts
     try {
-      const countRef = ref(db, "stats/active_couriers");
-      const unsubscribeCount = onValue(countRef, (snapshot) => {
-        setCourierCount(snapshot.val() || 3);
+      const channel = new BroadcastChannel("opentrack_driver_channel");
+      channel.onmessage = () => {
+        setStatus("PWA Linked");
         setIsLive(true);
-        setStatus("Cloud Synced");
-      }, (error) => {
-        setCourierCount(3);
-        setIsLive(true);
-        setStatus("Standalone Engine");
-      });
-
-      return () => unsubscribeCount();
+      };
+      return () => channel.close();
     } catch {
-      setCourierCount(3);
-      setIsLive(true);
-      setStatus("Standalone Engine");
+      setStatus("Autonomous Engine");
     }
   }, []);
 
