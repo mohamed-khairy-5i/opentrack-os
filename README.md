@@ -1,6 +1,9 @@
 <div align="center">
-  <img src="public/logo.svg" width="360" alt="OpenTrack OS Logo" />
-  <p><strong>The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.</strong></p>
+  <a href="https://github.com/mohamed-khairy-5i/opentrack-os">
+    <img src="public/icon.svg" width="108" height="108" alt="OpenTrack OS Logo" />
+  </a>
+  <h1 align="center">OpenTrack OS</h1>
+  <p align="center"><strong>The Zero-Cost, Drop-in Open Source Alternative to Google Maps & Google Fleet Engine for React and Next.js.</strong></p>
 </div>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
